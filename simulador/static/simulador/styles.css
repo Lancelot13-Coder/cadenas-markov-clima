@@ -1,0 +1,40 @@
+﻿:root {
+  color-scheme: light;
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  color: #18313b;
+  background: #f2f7f7;
+  font-synthesis: none;
+}
+* { box-sizing: border-box; }
+body { margin: 0; line-height: 1.55; }
+.container { width: min(100% - 2rem, 68rem); margin: 0 auto; padding: 2rem 0 3rem; }
+.page-header { margin-bottom: 1.5rem; }
+.page-header h1 { max-width: 48rem; margin: 0.2rem 0 0.5rem; line-height: 1.15; }
+.eyebrow { margin: 0; color: #176b66; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; }
+.panel, .notice { margin: 1rem 0; padding: 1.25rem; border: 1px solid #d1e1e0; border-radius: 0.8rem; background: #fff; box-shadow: 0 0.2rem 0.8rem #18313b0b; }
+.notice { border-left: 0.35rem solid #b47519; background: #fffaf0; }
+h2 { margin-top: 0; font-size: 1.25rem; }
+p { max-width: 74ch; }
+form p { display: grid; gap: 0.35rem; max-width: 30rem; }
+input, select, button { min-height: 2.7rem; padding: 0.45rem 0.65rem; font: inherit; }
+button { border: 0; border-radius: 0.45rem; background: #176b66; color: #fff; font-weight: 700; cursor: pointer; }
+button:hover { background: #105550; }
+:focus-visible { outline: 3px solid #d19024; outline-offset: 2px; }
+.table-scroll { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+caption { padding: 0.6rem 0; text-align: left; color: #46616a; }
+th, td { padding: 0.65rem; border: 1px solid #d1e1e0; text-align: left; }
+thead { background: #e9f3f2; }
+tbody tr:nth-child(even) { background: #f7faf9; }
+.sequence { display: flex; flex-wrap: wrap; gap: 0.55rem; margin: 0; padding: 0; list-style-position: inside; }
+.sequence li { padding: 0.45rem 0.7rem; border-radius: 2rem; background: #e9f3f2; }
+footer { margin-top: 1.5rem; color: #46616a; font-size: 0.9rem; }
+@media (max-width: 40rem) {
+  .container { width: min(100% - 1rem, 68rem); padding-top: 1rem; }
+  .panel, .notice { padding: 0.9rem; }
+  th, td { padding: 0.45rem; }
+}
+
+.chart-container { position: relative; min-height: 22rem; }
+@media (max-width: 40rem) { .chart-container { min-height: 18rem; } }
+

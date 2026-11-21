@@ -30,3 +30,6 @@ htmlcov/
 
 # Logs
 *.log
+# Dependencias de interfaz
+node_modules/
+

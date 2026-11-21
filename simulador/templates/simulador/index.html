@@ -1,0 +1,98 @@
+﻿{% load static %}
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Simulador climático con cadenas de Markov</title>
+  <link rel="stylesheet" href="{% static 'simulador/styles.css' %}">
+</head>
+<body>
+  <main class="container">
+    <header class="page-header">
+      <p class="eyebrow">Modelo probabilístico educativo</p>
+      <h1>Simulador climático con cadenas de Markov</h1>
+      <p>Explora cómo cambian las probabilidades de tres estados a través del tiempo.</p>
+    </header>
+
+    <section class="notice" aria-labelledby="notice-title">
+      <h2 id="notice-title">Alcance del modelo</h2>
+      <p>La matriz y sus valores son hipotéticos y se eligieron para fines académicos. Este simulador no representa observaciones meteorológicas ni es un pronóstico oficial.</p>
+    </section>
+
+    <section class="panel" aria-labelledby="controls-title">
+      <h2 id="controls-title">Configura la simulación</h2>
+      <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Calcular y simular</button>
+      </form>
+    </section>
+
+    <section class="panel" aria-labelledby="matrix-title">
+      <h2 id="matrix-title">Matriz de transición hipotética</h2>
+      <p>Las filas indican el estado actual y las columnas el siguiente estado. Cada fila suma 1.</p>
+      <div class="table-scroll">
+        <table>
+          <caption>Probabilidad de pasar del estado de la fila al estado de la columna</caption>
+          <thead>
+            <tr><th scope="col">Estado actual &darr; / Siguiente &rarr;</th>{% for state in states %}<th scope="col">{{ state }}</th>{% endfor %}</tr>
+          </thead>
+          <tbody>
+            {% for row in transition_rows %}
+            <tr><th scope="row">{{ row.current_state }}</th>{% for probability in row.probabilities %}<td>{{ probability|floatformat:2 }}</td>{% endfor %}</tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="panel" aria-labelledby="initial-title">
+      <h2 id="initial-title">Distribución inicial</h2>
+      <p>Predeterminada uniforme: &pi;(0) = [1/3, 1/3, 1/3]. Al elegir un estado, su probabilidad inicial es 1.</p>
+      <table>
+        <caption>Probabilidad inicial por estado</caption>
+        <thead><tr><th scope="col">Estado</th><th scope="col">Probabilidad</th></tr></thead>
+        <tbody>{% for state, probability in initial_rows %}<tr><th scope="row">{{ state }}</th><td>{{ probability|floatformat:4 }}</td></tr>{% endfor %}</tbody>
+      </table>
+    </section>
+
+    <section class="panel" aria-labelledby="results-title">
+      <h2 id="results-title">Distribuciones después de varios pasos</h2>
+      <p>Se calcula &pi;(n) = &pi;(0) &times; P<sup>n</sup>. Los valores se redondean solo para mostrarlos.</p>
+      <div class="table-scroll">
+        <table>
+          <caption>Probabilidades de cada estado para los pasos requeridos</caption>
+          <thead><tr><th scope="col">Pasos</th>{% for state in states %}<th scope="col">{{ state }}</th>{% endfor %}</tr></thead>
+          <tbody>
+            {% for row in result_rows %}
+            <tr><th scope="row">{{ row.steps }}</th>{% for probability in row.probabilities %}<td>{{ probability|floatformat:4 }}</td>{% endfor %}</tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="panel" aria-labelledby="chart-title">
+      <h2 id="chart-title">Gráfica de probabilidades</h2>
+      <p id="chart-description">La gráfica resume los valores de la tabla anterior. La tabla contiene la alternativa textual completa.</p>
+      <div class="chart-container">
+        <canvas id="distribution-chart" role="img" aria-label="Probabilidad de cada estado climático en los pasos 1, 3, 5 y 10" aria-describedby="chart-description"></canvas>
+      </div>
+    </section>
+    {{ chart_data|json_script:"distribution-chart-data" }}
+    <script src="{% static 'simulador/vendor/chart.umd.min.js' %}" defer></script>
+    <script src="{% static 'simulador/results-chart.js' %}" defer></script>
+
+    {% if sequence %}
+    <section class="panel" aria-labelledby="sequence-title">
+      <h2 id="sequence-title">Secuencia simulada</h2>
+      <p>Incluye el estado inicial y cada transición posterior ({{ sequence|length }} estados).</p>
+      <ol class="sequence">{% for state in sequence %}<li>{{ state }}</li>{% endfor %}</ol>
+    </section>
+    {% endif %}
+
+    <footer><p>La distribución representa probabilidades del modelo, no la certeza del clima en un lugar o fecha.</p></footer>
+  </main>
+</body>
+</html>

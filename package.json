@@ -1,0 +1,9 @@
+﻿{
+  "name": "simulador-climatico-markov",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Recursos de interfaz del simulador climático educativo",
+  "dependencies": {
+    "chart.js": "^4.5.1"
+  }
+}
