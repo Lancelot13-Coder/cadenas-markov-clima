@@ -1,0 +1,60 @@
+
+schema: spec-driven
+
+context: |
+  Proyecto académico: Simulador Climático mediante Cadenas de Markov.
+
+  El objetivo es desarrollar una aplicación web que permita modelar,
+  calcular y visualizar la evolución probabilística de estados
+  climáticos mediante cadenas de Markov.
+
+  Idioma:
+    - Todos los artefactos de OpenSpec deben redactarse en español.
+    - Los nombres técnicos de tecnologías y conceptos pueden conservarse
+      en su idioma original cuando sea necesario.
+
+  Tecnologías previstas:
+    - Python como lenguaje principal.
+    - Django como framework web.
+    - HTML, CSS y JavaScript para la interfaz.
+    - NumPy para operaciones matriciales, sujeto al diseño técnico.
+    - Chart.js para visualizaciones, sujeto al diseño técnico.
+
+  Modelo matemático:
+    - Estados iniciales: Soleado, Nublado y Lluvioso.
+    - Se utilizará una matriz de transición de Markov.
+    - Las probabilidades de cada fila de la matriz deben sumar 1.
+    - La distribución probabilística se calculará mediante pi(n) = pi(0) * P^n.
+    - Se estudiarán los pasos 1, 3, 5 y 10.
+    - Los valores definitivos de la matriz deben justificarse y documentarse.
+
+  Calidad y validación:
+    - Los cálculos matemáticos deben verificarse mediante pruebas automatizadas.
+    - Las probabilidades deben ser válidas y sumar aproximadamente 1.
+    - La interfaz debe presentar los resultados de manera comprensible.
+    - No se deben inventar datos meteorológicos reales ni presentar
+      simulaciones educativas como pronósticos oficiales.
+
+  Metodología:
+    - Aplicar Spec-Driven Development (SDD).
+    - Mantener trazabilidad entre requisitos, diseño, tareas,
+      implementación y pruebas.
+    - Revisar las especificaciones y el diseño antes de implementar.
+    - No comenzar la programación hasta aprobar los artefactos
+      de planificación correspondientes.
+
+rules:
+  proposal:
+    - Redactar las propuestas en español.
+    - Describir claramente el problema, los objetivos y el alcance.
+    - Identificar explícitamente lo que queda fuera del alcance.
+  specs:
+    - Utilizar requisitos verificables y escenarios concretos.
+    - Redactar los escenarios en español.
+  design:
+    - Justificar las decisiones técnicas y matemáticas.
+    - Explicar la estructura propuesta de Django.
+  tasks:
+    - Dividir el trabajo en tareas pequeñas y verificables.
+    - Relacionar las tareas con los requisitos correspondientes.
+
